@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { IcoCheckCircle } from "@/components/icons";
 
 const highlights = [
   "Full-Stack Web & Mobile Development",
@@ -74,10 +74,9 @@ export default function About() {
                   key={item}
                   className="flex items-center gap-3 text-sm text-ink-dim"
                 >
-                  <CheckCircle2
+                  <IcoCheckCircle
                     className="h-4 w-4 shrink-0 text-secondary"
                     aria-hidden="true"
-                    strokeWidth={2}
                   />
                   {item}
                 </li>

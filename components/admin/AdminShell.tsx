@@ -4,39 +4,39 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  LayoutDashboard,
-  MessageSquare,
-  FolderKanban,
-  LogOut,
-  Menu,
-  X,
-  Settings,
-  Quote,
-  Share2,
-} from "lucide-react";
+  IcoLayoutDashboard,
+  IcoMessageSquare,
+  IcoFolderKanban,
+  IcoLogOut,
+  IcoMenu,
+  IcoClose,
+  IcoSettings,
+  IcoQuote,
+  IcoShare2,
+} from "@/components/icons";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  {
-    href: "/admin/messages",
-    label: "Messages",
-    icon: MessageSquare,
-    exact: false,
-  },
+  { href: "/admin", label: "Dashboard", icon: IcoLayoutDashboard, exact: true },
+  { href: "/admin/messages", label: "Messages", icon: IcoMessageSquare, exact: false },
   {
     href: "/admin/projects",
     label: "Projects",
-    icon: FolderKanban,
+    icon: IcoFolderKanban,
     exact: false,
   },
   {
     href: "/admin/testimonials",
     label: "Testimonials",
-    icon: Quote,
+    icon: IcoQuote,
     exact: false,
   },
-  { href: "/admin/socials", label: "Socials", icon: Share2, exact: false },
-  { href: "/admin/settings", label: "Settings", icon: Settings, exact: false },
+  { href: "/admin/socials", label: "Socials", icon: IcoShare2, exact: false },
+  {
+    href: "/admin/settings",
+    label: "Settings",
+    icon: IcoSettings,
+    exact: false,
+  },
 ];
 
 export default function AdminShell({
@@ -93,7 +93,7 @@ export default function AdminShell({
             className="cursor-pointer text-ink-dim hover:text-ink lg:hidden"
             aria-label="Close sidebar"
           >
-            <X size={18} />
+            <IcoClose size={18} />
           </button>
         </div>
 
@@ -136,7 +136,7 @@ export default function AdminShell({
             onClick={handleLogout}
             className="cursor-pointer flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink-dim transition-all duration-200 hover:bg-red-500/10 hover:text-red-400"
           >
-            <LogOut size={17} aria-hidden="true" />
+            <IcoLogOut size={17} aria-hidden="true" />
             Sign Out
           </button>
         </div>
@@ -154,7 +154,7 @@ export default function AdminShell({
             aria-expanded={sidebarOpen}
             aria-controls="admin-sidebar"
           >
-            <Menu size={20} />
+            <IcoMenu size={20} />
           </button>
 
           <div className="flex items-center gap-3 lg:ml-auto">

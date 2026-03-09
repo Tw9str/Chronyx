@@ -2,13 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Mail,
-  ArrowRight,
-  KeyRound,
-  Loader2,
-  CheckCircle2,
-} from "lucide-react";
 
 type Step = "email" | "otp" | "success";
 

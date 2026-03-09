@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
@@ -58,6 +59,7 @@ export async function POST(req: NextRequest) {
     },
   });
 
+  revalidatePath("/", "layout");
   return NextResponse.json(project, { status: 201 });
 }
 
@@ -71,6 +73,7 @@ export async function PATCH(req: NextRequest) {
   if (!id) return NextResponse.json({ error: "id required." }, { status: 400 });
 
   const project = await prisma.project.update({ where: { id }, data });
+  revalidatePath("/", "layout");
   return NextResponse.json(project);
 }
 
@@ -84,5 +87,6 @@ export async function DELETE(req: NextRequest) {
   if (!id) return NextResponse.json({ error: "id required." }, { status: 400 });
 
   await prisma.project.delete({ where: { id } });
+  revalidatePath("/", "layout");
   return NextResponse.json({ ok: true });
 }

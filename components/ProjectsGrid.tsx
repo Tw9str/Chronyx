@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Github, ExternalLink, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
+import { IcoGithubOutline, IcoExternalLink, IcoSlidersHorizontal } from "@/components/icons";
 
 type Project = {
   id: string;
@@ -93,7 +93,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
 
         {/* Sort dropdown */}
         <div className="flex items-center gap-2 text-sm text-ink-dim">
-          <SlidersHorizontal className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <IcoSlidersHorizontal className="h-4 w-4 shrink-0" aria-hidden="true" />
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortKey)}
@@ -196,7 +196,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                         aria-label={`${p.title} GitHub repository`}
                         className="cursor-pointer rounded-md p-1 text-ink-fade transition-colors hover:text-ink"
                       >
-                        <Github className="h-4 w-4" />
+                        <IcoGithubOutline className="h-4 w-4" />
                       </Link>
                     )}
                     {p.liveUrl && (
@@ -207,7 +207,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                         aria-label={`${p.title} live site`}
                         className="cursor-pointer rounded-md p-1 text-ink-fade transition-colors hover:text-ink"
                       >
-                        <ExternalLink className="h-4 w-4" />
+                        <IcoExternalLink className="h-4 w-4" />
                       </Link>
                     )}
                   </div>

@@ -1,5 +1,5 @@
-import { Star } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { IcoStar } from "@/components/icons";
 
 const fallback = [
   {
@@ -42,7 +42,7 @@ function Stars({ count }: { count: number }) {
       role="img"
     >
       {Array.from({ length: count }).map((_, i) => (
-        <Star
+        <IcoStar
           key={i}
           className="h-4 w-4 fill-amber-400 text-amber-400"
           aria-hidden="true"

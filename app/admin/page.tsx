@@ -2,9 +2,14 @@ import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import AdminShell from "@/components/admin/AdminShell";
-import { MessageSquare, FolderKanban, Mail, Clock } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  IcoMessageSquare,
+  IcoMail,
+  IcoFolderKanban,
+  IcoClock,
+} from "@/components/icons";
 
 interface RecentMessage {
   id: string;
@@ -45,14 +50,14 @@ export default async function AdminDashboardPage() {
     {
       label: "Total Messages",
       value: totalMessages,
-      icon: MessageSquare,
+      icon: IcoMessageSquare,
       color: "text-primary-light",
       bg: "bg-primary/10",
     },
     {
       label: "Unread",
       value: unreadMessages,
-      icon: Mail,
+      icon: IcoMail,
       color: "text-secondary-light",
       bg: "bg-secondary/10",
       highlight: unreadMessages > 0,
@@ -60,7 +65,7 @@ export default async function AdminDashboardPage() {
     {
       label: "Projects",
       value: totalProjects,
-      icon: FolderKanban,
+      icon: IcoFolderKanban,
       color: "text-green-400",
       bg: "bg-green-500/10",
     },
@@ -173,8 +178,13 @@ export default async function AdminDashboardPage() {
                       </span>
                     )}
                     <div className="flex items-center gap-1 text-xs text-ink-fade">
-                      <Clock className="h-3 w-3" aria-hidden="true" />
-                      {new Date(msg.createdAt).toLocaleDateString()}
+                      <IcoClock className="h-3 w-3" aria-hidden="true" />
+                      {new Date(msg.createdAt).toLocaleString(undefined, {
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </div>
                   </div>
                 </li>

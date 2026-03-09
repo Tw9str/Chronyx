@@ -2,29 +2,28 @@
 
 import { useState, useCallback } from "react";
 import {
-  Code2,
-  Smartphone,
-  TrendingUp,
-  Share2,
-  FileText,
-  Target,
-  ArrowRight,
-  ArrowLeft,
-  Calculator,
-  Clock,
-  Zap,
-  Rocket,
-  Users,
-  Paintbrush,
-  Wrench,
-  CheckCircle2,
-  ChevronDown,
-  ChevronUp,
-  Info,
-} from "lucide-react";
+  IcoCode2,
+  IcoSmartphone,
+  IcoTrendingUp,
+  IcoShare2,
+  IcoFileText,
+  IcoTarget,
+  IcoClock,
+  IcoZap,
+  IcoRocket,
+  IcoWrench,
+  IcoPaintbrush,
+  IcoArrowRight,
+  IcoArrowLeft,
+  IcoCalculator,
+  IcoCheckCircle,
+  IcoChevronDown,
+  IcoChevronUp,
+  IcoInfo,
+  IcoUsers,
+} from "@/components/icons";
 
 //  Types
-
 type Tag = { label: string; color: string };
 
 type Scope = {
@@ -68,7 +67,7 @@ const SERVICES: ServiceConfig[] = [
   {
     id: "web",
     label: "Web Development",
-    icon: Code2,
+    icon: IcoCode2,
     accent: "text-primary-light",
     glow: "bg-primary/10",
     border: "border-primary/30",
@@ -227,7 +226,7 @@ const SERVICES: ServiceConfig[] = [
   {
     id: "mobile",
     label: "Mobile App",
-    icon: Smartphone,
+    icon: IcoSmartphone,
     accent: "text-secondary-light",
     glow: "bg-secondary/10",
     border: "border-secondary/30",
@@ -361,7 +360,7 @@ const SERVICES: ServiceConfig[] = [
   {
     id: "seo",
     label: "SEO & Analytics",
-    icon: TrendingUp,
+    icon: IcoTrendingUp,
     accent: "text-green-400",
     glow: "bg-green-500/10",
     border: "border-green-500/30",
@@ -483,7 +482,7 @@ const SERVICES: ServiceConfig[] = [
   {
     id: "social",
     label: "Social Media",
-    icon: Share2,
+    icon: IcoShare2,
     accent: "text-pink-400",
     glow: "bg-pink-500/10",
     border: "border-pink-500/30",
@@ -588,7 +587,7 @@ const SERVICES: ServiceConfig[] = [
   {
     id: "content",
     label: "Content Strategy",
-    icon: FileText,
+    icon: IcoFileText,
     accent: "text-amber-400",
     glow: "bg-amber-500/10",
     border: "border-amber-500/30",
@@ -693,7 +692,7 @@ const SERVICES: ServiceConfig[] = [
   {
     id: "ads",
     label: "Paid Advertising",
-    icon: Target,
+    icon: IcoTarget,
     accent: "text-orange-400",
     glow: "bg-orange-500/10",
     border: "border-orange-500/30",
@@ -804,15 +803,14 @@ const TIMELINES = [
     label: "Standard",
     desc: "Normal pace delivery",
     multiplier: 1,
-    Icon: Clock,
-    fee: null,
+    Icon: IcoClock,
   },
   {
     id: "fast",
     label: "Accelerated",
     desc: "Priority scheduling",
     multiplier: 1.25,
-    Icon: Zap,
+    Icon: IcoZap,
     fee: "+25% priority fee",
   },
   {
@@ -820,7 +818,7 @@ const TIMELINES = [
     label: "Rush",
     desc: "Drop-everything sprint",
     multiplier: 1.5,
-    Icon: Rocket,
+    Icon: IcoRocket,
     fee: "+50% rush fee",
   },
 ];
@@ -831,21 +829,21 @@ const DESIGN_LEVELS = [
     label: "Basic",
     desc: "Clean template-based design",
     multiplier: 1,
-    Icon: Wrench,
+    Icon: IcoWrench,
   },
   {
     id: "custom",
     label: "Custom",
     desc: "Bespoke UI designed from scratch",
     multiplier: 1.3,
-    Icon: Paintbrush,
+    Icon: IcoPaintbrush,
   },
   {
     id: "premium",
     label: "Premium",
     desc: "High-end brand system + UI",
     multiplier: 1.6,
-    Icon: Zap,
+    Icon: IcoZap,
   },
 ];
 
@@ -930,7 +928,7 @@ function PriceBadge({
   return (
     <div className="mb-5 flex items-center justify-between rounded-xl border border-edge bg-overlay px-4 py-2.5">
       <span className="text-xs font-medium text-ink-dim flex items-center gap-1.5">
-        <Calculator className="h-3.5 w-3.5" aria-hidden="true" />
+        <IcoCalculator className="h-3.5 w-3.5" aria-hidden="true" />
         Running estimate
       </span>
       <span className={`font-display text-base font-bold ${accent}`}>
@@ -1157,7 +1155,7 @@ export default function CostCalculator() {
                     disabled={!serviceId}
                     className={primaryBtn}
                   >
-                    Next <ArrowRight className="h-4 w-4" />
+                    Next <IcoArrowRight className="h-4 w-4" />
                   </button>
                 </div>
               </div>
@@ -1230,9 +1228,9 @@ export default function CostCalculator() {
                               className="flex items-center gap-1 text-xs font-medium text-ink-dim hover:text-ink"
                             >
                               {showIncludes ? (
-                                <ChevronUp className="h-3 w-3" />
+                                <IcoChevronUp className="h-3 w-3" />
                               ) : (
-                                <ChevronDown className="h-3 w-3" />
+                                <IcoChevronDown className="h-3 w-3" />
                               )}
                               {showIncludes ? "Hide" : "Show"} what is included
                             </button>
@@ -1243,7 +1241,7 @@ export default function CostCalculator() {
                                     key={inc}
                                     className="flex items-center gap-1.5 text-xs text-ink-dim"
                                   >
-                                    <CheckCircle2
+                                    <IcoCheckCircle
                                       className="h-3 w-3 shrink-0 text-secondary"
                                       aria-hidden="true"
                                     />
@@ -1260,14 +1258,14 @@ export default function CostCalculator() {
                 </div>
                 <div className="mt-6 flex justify-between">
                   <button onClick={() => setStep(0)} className={navBtn}>
-                    <ArrowLeft className="h-4 w-4" /> Back
+                    <IcoArrowLeft className="h-4 w-4" /> Back
                   </button>
                   <button
                     onClick={() => setStep(2)}
                     disabled={!scopeId}
                     className={primaryBtn}
                   >
-                    Next <ArrowRight className="h-4 w-4" />
+                    Next <IcoArrowRight className="h-4 w-4" />
                   </button>
                 </div>
               </div>
@@ -1297,7 +1295,7 @@ export default function CostCalculator() {
                         onClick={() => setTeamId(id)}
                         className={`cursor-pointer rounded-xl border p-3 text-left transition-all duration-200 ${teamId === id ? `${service.border} ${service.glow}` : "border-edge bg-overlay hover:border-primary-light/30"}`}
                       >
-                        <Users
+                        <IcoUsers
                           className={`mb-1.5 h-4 w-4 ${teamId === id ? service.accent : "text-ink-fade"}`}
                           aria-hidden="true"
                         />
@@ -1375,7 +1373,7 @@ export default function CostCalculator() {
                     <div className="mt-1 flex justify-between text-xs text-ink-fade">
                       <span>1</span>
                       <span className="flex items-center gap-1">
-                        <Info className="h-3 w-3" aria-hidden="true" /> Extra
+                        <IcoInfo className="h-3 w-3" aria-hidden="true" /> Extra
                         pages add to base price
                       </span>
                       <span>30</span>
@@ -1385,10 +1383,10 @@ export default function CostCalculator() {
 
                 <div className="mt-6 flex justify-between">
                   <button onClick={() => setStep(1)} className={navBtn}>
-                    <ArrowLeft className="h-4 w-4" /> Back
+                    <IcoArrowLeft className="h-4 w-4" /> Back
                   </button>
                   <button onClick={() => setStep(3)} className={primaryBtn}>
-                    Next <ArrowRight className="h-4 w-4" />
+                    Next <IcoArrowRight className="h-4 w-4" />
                   </button>
                 </div>
               </div>
@@ -1432,9 +1430,9 @@ export default function CostCalculator() {
                             )}
                           </div>
                           {open ? (
-                            <ChevronUp className="h-4 w-4 text-ink-fade" />
+                            <IcoChevronUp className="h-4 w-4 text-ink-fade" />
                           ) : (
-                            <ChevronDown className="h-4 w-4 text-ink-fade" />
+                            <IcoChevronDown className="h-4 w-4 text-ink-fade" />
                           )}
                         </button>
                         {open && (
@@ -1482,7 +1480,7 @@ export default function CostCalculator() {
                 </div>
                 <div className="mt-6 flex justify-between">
                   <button onClick={() => setStep(2)} className={navBtn}>
-                    <ArrowLeft className="h-4 w-4" /> Back
+                    <IcoArrowLeft className="h-4 w-4" /> Back
                   </button>
                   <button
                     onClick={() =>
@@ -1491,7 +1489,7 @@ export default function CostCalculator() {
                     className={primaryBtn}
                   >
                     {service.isMonthly ? "See Estimate" : "Next"}{" "}
-                    <ArrowRight className="h-4 w-4" />
+                    <IcoArrowRight className="h-4 w-4" />
                   </button>
                 </div>
               </div>
@@ -1554,13 +1552,13 @@ export default function CostCalculator() {
                 </div>
                 <div className="mt-6 flex justify-between">
                   <button onClick={() => setStep(3)} className={navBtn}>
-                    <ArrowLeft className="h-4 w-4" /> Back
+                    <IcoArrowLeft className="h-4 w-4" /> Back
                   </button>
                   <button
                     onClick={() => setStep(RESULT)}
                     className={primaryBtn}
                   >
-                    See Estimate <ArrowRight className="h-4 w-4" />
+                    See Estimate <IcoArrowRight className="h-4 w-4" />
                   </button>
                 </div>
               </div>
@@ -1574,7 +1572,7 @@ export default function CostCalculator() {
                     <div
                       className={`flex h-14 w-14 items-center justify-center rounded-2xl ${service.glow}`}
                     >
-                      <Calculator
+                      <IcoCalculator
                         className={`h-7 w-7 ${service.accent}`}
                         aria-hidden="true"
                       />
@@ -1695,7 +1693,7 @@ export default function CostCalculator() {
                           Estimated Delivery
                         </h4>
                         <div className="flex items-center gap-2 text-sm">
-                          <Clock
+                          <IcoClock
                             className="h-4 w-4 text-ink-fade"
                             aria-hidden="true"
                           />
@@ -1739,7 +1737,7 @@ export default function CostCalculator() {
                             key={inc}
                             className="flex items-start gap-1.5 text-xs text-ink-dim"
                           >
-                            <CheckCircle2
+                            <IcoCheckCircle
                               className="mt-0.5 h-3 w-3 shrink-0 text-secondary"
                               aria-hidden="true"
                             />
@@ -1761,7 +1759,7 @@ export default function CostCalculator() {
                     onClick={goToContact}
                     className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-light glow-violet"
                   >
-                    Start My Project <ArrowRight className="h-4 w-4" />
+                    Start My Project <IcoArrowRight className="h-4 w-4" />
                   </button>
                   <button
                     onClick={reset}

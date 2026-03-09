@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { IcoMenu, IcoClose, IcoArrowRight } from "@/components/icons";
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -87,7 +87,7 @@ export default function Navbar() {
               className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-light glow-violet md:inline-flex"
             >
               Get a Quote
-              <ArrowRight />
+              <IcoArrowRight className="h-3.5 w-3.5" />
             </Link>
             <button
               type="button"
@@ -98,9 +98,9 @@ export default function Navbar() {
               aria-controls="mobile-menu"
             >
               {isOpen ? (
-                <X size={20} aria-hidden="true" />
+                <IcoClose width={20} height={20} />
               ) : (
-                <Menu size={20} aria-hidden="true" />
+                <IcoMenu width={20} height={20} />
               )}
             </button>
           </div>
@@ -189,22 +189,3 @@ function LogoMark() {
   );
 }
 
-function ArrowRight() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M1 7H13M13 7L7 1M13 7L7 13"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}

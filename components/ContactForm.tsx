@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, type FormEvent, type ChangeEvent } from "react";
-import { Send, CheckCircle2, Loader2 } from "lucide-react";
+import { IcoSpinner, IcoSend, IcoCheckCircle } from "@/components/icons";
 
 const FALLBACK_EMAIL = "hello@chronyx.tech";
 
@@ -86,7 +86,7 @@ export default function ContactForm({ email }: { email?: string }) {
   if (status === "success") {
     return (
       <div className="flex h-full min-h-100 flex-col items-center justify-center gap-4 text-center">
-        <CheckCircle2 className="h-14 w-14 text-secondary" aria-hidden="true" />
+        <IcoCheckCircle className="h-14 w-14 text-secondary" aria-hidden="true" />
         <h3 className="font-display text-2xl font-bold text-ink">
           Message Received!
         </h3>
@@ -269,12 +269,13 @@ export default function ContactForm({ email }: { email?: string }) {
       >
         {status === "sending" ? (
           <>
-            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />{" "}
+            <IcoSpinner className="h-4 w-4 animate-spin" aria-hidden="true" />{" "}
             Sending…
           </>
         ) : (
           <>
-            Send Message <Send className="h-4 w-4" aria-hidden="true" />
+            Send Message{" "}
+            <IcoSend className="h-4 w-4" aria-hidden="true" />
           </>
         )}
       </button>

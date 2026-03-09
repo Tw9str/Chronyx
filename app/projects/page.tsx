@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import ProjectsGrid from "@/components/ProjectsGrid";
+import { IcoArrowLeft } from "@/components/icons";
 
 export const metadata = {
   title: "All Projects — Chronyx",
@@ -156,7 +156,7 @@ export default async function ProjectsPage() {
             href="/#work"
             className="flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-ink-dim transition-colors hover:text-ink"
           >
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            <IcoArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to Home
           </Link>
         </div>

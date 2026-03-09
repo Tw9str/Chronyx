@@ -1,6 +1,7 @@
 ﻿import Link from "next/link";
-import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import PortfolioFilterGrid from "./PortfolioFilterGrid";
+import { IcoArrowUpRight } from "@/components/icons";
 
 const fallbackProjects = [
   {
@@ -86,7 +87,21 @@ export default async function Portfolio() {
     })
     .catch(() => []);
 
-  const projects = dbProjects.length > 0 ? dbProjects : fallbackProjects;
+  const projects =
+    dbProjects.length > 0
+      ? dbProjects.map((p) => ({
+          id: p.id,
+          title: p.title,
+          category: p.category,
+          description: p.description,
+          tags: p.tags,
+          gradient: p.gradient,
+          accent: p.accent,
+          result: p.result,
+          liveUrl: p.liveUrl,
+          repoUrl: p.repoUrl,
+        }))
+      : fallbackProjects;
 
   return (
     <section
@@ -123,103 +138,11 @@ export default async function Portfolio() {
             className="inline-flex items-center gap-2 rounded-full border border-edge bg-surface px-5 py-2.5 text-sm font-medium text-ink-dim transition-all duration-200 hover:border-primary-light/40 hover:text-ink whitespace-nowrap"
           >
             Start a Project
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            <IcoArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
-        {/* Projects grid */}
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
-          {projects.map((p) => {
-            const key = "id" in p ? (p.id as string) : p.title;
-            return (
-              <li key={key}>
-                <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-edge bg-surface card-hover-border">
-                  {/* Visual header */}
-                  <div
-                    className={`relative flex h-40 items-center justify-center bg-linear-to-br ${p.gradient}`}
-                  >
-                    <div
-                      className="absolute inset-0 opacity-20 bg-dot-grid"
-                      aria-hidden="true"
-                    />
-                    <span
-                      className="font-display text-4xl font-bold uppercase tracking-widest opacity-20"
-                      aria-hidden="true"
-                      style={{ color: p.accent }}
-                    >
-                      {p.title.split(" ")[0]}
-                    </span>
-                    <span
-                      className="absolute right-4 top-4 rounded-full border px-3 py-1 text-xs font-semibold"
-                      style={{
-                        borderColor: `${p.accent}40`,
-                        color: p.accent,
-                        background: `${p.accent}15`,
-                      }}
-                    >
-                      {p.category}
-                    </span>
-                  </div>
-
-                  {/* Body */}
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-display text-base font-semibold text-ink">
-                      {p.title}
-                    </h3>
-                    <p className="mt-1.5 flex-1 text-sm leading-relaxed text-ink-dim">
-                      {p.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {p.tags.map((t) => (
-                        <span
-                          key={t}
-                          className="rounded-full border border-edge bg-overlay px-2.5 py-0.5 text-xs text-ink-fade"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Result + Links */}
-                    <div className="mt-4 flex items-center gap-2 border-t border-edge pt-4">
-                      <span
-                        className="h-2 w-2 shrink-0 rounded-full bg-secondary"
-                        aria-hidden="true"
-                      />
-                      <span className="flex-1 text-xs font-semibold text-secondary-light">
-                        {p.result}
-                      </span>
-                      {p.repoUrl && (
-                        <Link
-                          href={p.repoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${p.title} GitHub repository`}
-                          className="rounded-md p-1 text-ink-fade transition-colors hover:text-ink"
-                        >
-                          <Github className="h-4 w-4" />
-                        </Link>
-                      )}
-                      {p.liveUrl && (
-                        <Link
-                          href={p.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${p.title} live site`}
-                          className="rounded-md p-1 text-ink-fade transition-colors hover:text-ink"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              </li>
-            );
-          })}
-        </ul>
+        <PortfolioFilterGrid projects={projects} />
 
         {/* View all link */}
         <div className="mt-12 flex justify-center">
@@ -228,7 +151,7 @@ export default async function Portfolio() {
             className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-edge bg-surface px-6 py-3 text-sm font-medium text-ink-dim transition-all duration-200 hover:border-primary-light/40 hover:text-ink"
           >
             View All Projects
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            <IcoArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </div>
