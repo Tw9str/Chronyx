@@ -9,12 +9,20 @@
       <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
     </linearGradient>
   </defs>
+
+  <!-- Mark: stylised "C" arc + horizontal slash -->
   <g>
+    <!-- outer arc -->
     <path d="M 34 8 A 18 18 0 1 0 34 40" stroke="url(#grad)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- inner speed slash -->
     <line x1="16" y1="24" x2="36" y2="24" stroke="url(#grad)" stroke-width="3" stroke-linecap="round"/>
+    <!-- small accent dot -->
     <circle cx="38.5" cy="24" r="2.5" fill="#06b6d4"/>
+    <!-- glow behind mark -->
     <ellipse cx="26" cy="24" rx="20" ry="18" fill="url(#glowGrad)" opacity="0.35"/>
   </g>
+
+  <!-- Wordmark -->
   <text x="54" y="32"
     font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
     font-size="22"
