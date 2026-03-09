@@ -1,4 +1,5 @@
 import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import AdminShell from "@/components/admin/AdminShell";
 import { MessageSquare, FolderKanban, Mail, Clock } from "lucide-react";
@@ -17,7 +18,8 @@ export const metadata: Metadata = { title: "Dashboard" };
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  await getSession(); // middleware already guards this, but double-checks
+  const session = await getSession();
+  if (!session) redirect("/admin/login");
 
   const [totalMessages, unreadMessages, totalProjects, recentMessages] =
     await Promise.all([
