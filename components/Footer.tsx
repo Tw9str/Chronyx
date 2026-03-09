@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
 const footerLinks = {
   Services: [
@@ -18,67 +19,170 @@ const footerLinks = {
   ],
 };
 
-const socials = [
+function FooterSocialIcon({ platform }: { platform: string }) {
+  const cls = "h-5 w-5";
+  switch (platform) {
+    case "x":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      );
+    case "linkedin":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+        </svg>
+      );
+    case "github":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+        </svg>
+      );
+    case "dribbble":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.048 6.404 1.73 1.35 3.92 2.165 6.295 2.165 1.388 0 2.728-.252 3.972-.715l.037-.104zm-14.908-2.43c.26-.483 3.21-5.723 8.54-7.44.12-.04.24-.073.36-.104-.23-.518-.48-1.03-.74-1.538-5.29 1.582-10.43 1.52-10.878 1.51-.012.175-.018.35-.018.528 0 2.692.974 5.16 2.574 7.044l.162-.001zm-2.35-9.124c.46.01 4.9-.01 9.85-1.326-1.758-3.12-3.657-5.75-3.953-6.16-2.856 1.347-5.04 3.9-5.9 7.486zm7.726-8.04c.31.42 2.24 3.04 3.974 6.22 3.8-1.424 5.41-3.59 5.607-3.866-1.67-1.483-3.846-2.37-6.232-2.37-.45 0-.9.035-1.348.015l-.001.001z" />
+        </svg>
+      );
+    case "instagram":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          className={cls}
+          aria-hidden="true"
+        >
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle
+            cx="17.5"
+            cy="6.5"
+            r="0.5"
+            fill="currentColor"
+            stroke="none"
+          />
+        </svg>
+      );
+    case "youtube":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        </svg>
+      );
+    case "whatsapp":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+        </svg>
+      );
+    case "tiktok":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+        </svg>
+      );
+    default:
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className={cls}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+      );
+  }
+}
+
+const fallbackSocials = [
   {
-    name: "Twitter / X",
-    href: "https://twitter.com/chronyx",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-5 w-5"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
+    id: "fs1",
+    platform: "x",
+    label: "Twitter / X",
+    url: "https://twitter.com/chronyx",
   },
   {
-    name: "LinkedIn",
-    href: "https://linkedin.com/company/chronyx",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-5 w-5"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
+    id: "fs2",
+    platform: "linkedin",
+    label: "LinkedIn",
+    url: "https://linkedin.com/company/chronyx",
   },
   {
-    name: "GitHub",
-    href: "https://github.com/chronyx",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-5 w-5"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-      </svg>
-    ),
+    id: "fs3",
+    platform: "github",
+    label: "GitHub",
+    url: "https://github.com/chronyx",
   },
   {
-    name: "Dribbble",
-    href: "https://dribbble.com/chronyx",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-5 w-5"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.048 6.404 1.73 1.35 3.92 2.165 6.295 2.165 1.388 0 2.728-.252 3.972-.715l.037-.104zm-14.908-2.43c.26-.483 3.21-5.723 8.54-7.44.12-.04.24-.073.36-.104-.23-.518-.48-1.03-.74-1.538-5.29 1.582-10.43 1.52-10.878 1.51-.012.175-.018.35-.018.528 0 2.692.974 5.16 2.574 7.044l.162-.001zm-2.35-9.124c.46.01 4.9-.01 9.85-1.326-1.758-3.12-3.657-5.75-3.953-6.16-2.856 1.347-5.04 3.9-5.9 7.486zm7.726-8.04c.31.42 2.24 3.04 3.974 6.22 3.8-1.424 5.41-3.59 5.607-3.866-1.67-1.483-3.846-2.37-6.232-2.37-.45 0-.9.035-1.348.015l-.001.001z" />
-      </svg>
-    ),
+    id: "fs4",
+    platform: "dribbble",
+    label: "Dribbble",
+    url: "https://dribbble.com/chronyx",
   },
 ];
 
-export default function Footer() {
+export default async function Footer() {
   const year = new Date().getFullYear();
+
+  const [dbSocials, emailLink] = await Promise.all([
+    prisma.socialLink
+      .findMany({
+        where: { enabled: true, showInFooter: true },
+        orderBy: [{ order: "asc" }],
+      })
+      .catch(() => []),
+    prisma.socialLink
+      .findFirst({ where: { platform: "email" } })
+      .catch(() => null),
+  ]);
+
+  const socials = dbSocials.length > 0 ? dbSocials : fallbackSocials;
+  const emailAddress = emailLink?.value ?? "hello@chronyx.tech";
+  const emailHref = emailLink?.url ?? `mailto:${emailAddress}`;
 
   return (
     <footer
@@ -115,16 +219,16 @@ export default function Footer() {
             </p>
             <div className="mt-5 flex gap-3">
               {socials.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.href}
+                <Link
+                  key={s.id}
+                  href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={s.name}
+                  aria-label={s.label}
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-edge bg-surface text-ink-fade transition-all duration-200 hover:border-primary-light/40 hover:bg-overlay hover:text-primary-light"
                 >
-                  {s.icon}
-                </a>
+                  <FooterSocialIcon platform={s.platform} />
+                </Link>
               ))}
             </div>
           </div>
@@ -170,12 +274,12 @@ export default function Footer() {
             >
               Start a Project
             </Link>
-            <a
-              href="mailto:hello@chronyx.tech"
+            <Link
+              href={emailHref}
               className="mt-2 flex w-full items-center justify-center rounded-full border border-edge bg-overlay px-4 py-2.5 text-sm font-medium text-ink-dim transition-all duration-200 hover:border-primary-light/30 hover:text-ink"
             >
-              hello@chronyx.tech
-            </a>
+              {emailAddress}
+            </Link>
           </div>
         </div>
 
@@ -185,12 +289,13 @@ export default function Footer() {
             © {year} Chronyx. All rights reserved.
           </p>
           <p className="text-xs text-ink-fade">
-            <a
+            <Link
               href="https://chronyx.tech"
+              target="_blank"
               className="transition-colors hover:text-primary-light"
             >
               chronyx.tech
-            </a>
+            </Link>
           </p>
           <div className="flex gap-4 text-xs text-ink-fade">
             <Link

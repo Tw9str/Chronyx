@@ -1,0 +1,77 @@
+import { SignJWT, jwtVerify } from "jose";
+import { cookies } from "next/headers";
+import { NextRequest } from "next/server";
+
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET ?? "fallback-dev-secret-change-in-production",
+);
+
+export const COOKIE_NAME = "chronyx_admin_token";
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
+
+export interface JwtPayload {
+  sub: string; // admin user id
+  email: string;
+}
+
+// ── Sign a JWT and set it as an httpOnly cookie ────────
+export async function signAndSetCookie(payload: JwtPayload) {
+  const token = await new SignJWT({ ...payload })
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime("7d")
+    .sign(JWT_SECRET);
+
+  const cookieStore = await cookies();
+  cookieStore.set(COOKIE_NAME, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: COOKIE_MAX_AGE,
+  });
+
+  return token;
+}
+
+// ── Verify JWT from httpOnly cookie ───────────────────
+export async function getSession(): Promise<JwtPayload | null> {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(COOKIE_NAME)?.value;
+    if (!token) return null;
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    return payload as unknown as JwtPayload;
+  } catch {
+    return null;
+  }
+}
+
+// ── Verify from a NextRequest (middleware) ─────────────
+export async function verifyTokenFromRequest(
+  req: NextRequest,
+): Promise<JwtPayload | null> {
+  try {
+    const token = req.cookies.get(COOKIE_NAME)?.value;
+    if (!token) return null;
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    return payload as unknown as JwtPayload;
+  } catch {
+    return null;
+  }
+}
+
+// ── Clear auth cookie (logout) ─────────────────────────
+export async function clearCookie() {
+  const cookieStore = await cookies();
+  cookieStore.delete(COOKIE_NAME);
+}
+
+// ── Check if an email is in the ADMIN_EMAILS allow-list ─
+export function isAllowedAdminEmail(email: string): boolean {
+  const allowed = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return allowed.includes(email.toLowerCase());
+}

@@ -1,7 +1,9 @@
 import { Star } from "lucide-react";
+import { prisma } from "@/lib/prisma";
 
-const testimonials = [
+const fallback = [
   {
+    id: "1",
     name: "Sarah Mitchell",
     role: "CEO, TechStart Agency",
     quote:
@@ -11,6 +13,7 @@ const testimonials = [
     project: "Web Redesign + SEO",
   },
   {
+    id: "2",
     name: "James Kowalski",
     role: "Marketing Director, Nomad Ventures",
     quote:
@@ -20,6 +23,7 @@ const testimonials = [
     project: "Mobile App Development",
   },
   {
+    id: "3",
     name: "Ana Rodrigues",
     role: "Founder, GreenMart",
     quote:
@@ -48,7 +52,14 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-export default function Testimonials() {
+export default async function Testimonials() {
+  const dbItems = await prisma.testimonial
+    .findMany({
+      where: { enabled: true },
+      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+    })
+    .catch(() => []);
+  const testimonials = dbItems.length > 0 ? dbItems : fallback;
   return (
     <section
       id="testimonials"
@@ -83,7 +94,7 @@ export default function Testimonials() {
         {/* Cards */}
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
           {testimonials.map((t) => (
-            <li key={t.name}>
+            <li key={t.id}>
               <figure className="flex h-full flex-col rounded-2xl border border-edge bg-surface p-6 card-hover-border">
                 {/* Stars */}
                 <Stars count={t.rating} />

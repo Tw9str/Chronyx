@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
 const techs = [
   "React",
@@ -18,13 +19,27 @@ const techs = [
   "Framer",
 ];
 
-const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "30+", label: "Happy Clients" },
-  { value: "5+", label: "Years Experience" },
-];
-
-export default function Hero() {
+export default async function Hero() {
+  const [settings, projectCount] = await Promise.all([
+    prisma.setting
+      .findMany({
+        where: { key: { in: ["stat_projects", "stat_clients", "stat_years"] } },
+      })
+      .catch(() => []),
+    prisma.project.count().catch(() => 0),
+  ]);
+  const getStat = (key: string) =>
+    settings.find((s) => s.key === key)?.value ?? "";
+  const stats = [
+    {
+      value:
+        getStat("stat_projects") ||
+        (projectCount > 0 ? `${projectCount}+` : "50+"),
+      label: "Projects Delivered",
+    },
+    { value: getStat("stat_clients") || "30+", label: "Happy Clients" },
+    { value: getStat("stat_years") || "5+", label: "Years Experience" },
+  ];
   return (
     <section
       id="hero"
@@ -101,7 +116,7 @@ export default function Hero() {
                 href="#work"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-light glow-violet"
               >
-                View My Work
+                View Our Work
                 <svg
                   width="14"
                   height="14"

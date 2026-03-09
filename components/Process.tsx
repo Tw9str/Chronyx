@@ -10,7 +10,7 @@ const steps = [
   {
     number: "02",
     title: "Strategy",
-    desc: "I craft a tailored roadmap with clear milestones, technology choices, and KPIs. You know exactly what's being built, why, and when it ships.",
+    desc: "We craft a tailored roadmap with clear milestones, technology choices, and KPIs. You know exactly what's being built, why, and when it ships.",
     color: "text-secondary-light",
     border: "border-secondary/30",
     bg: "bg-secondary/10",
@@ -26,7 +26,7 @@ const steps = [
   {
     number: "04",
     title: "Launch & Scale",
-    desc: "Go live with confidence. Post-launch, I monitor performance, optimise based on real data, and scale what's working.",
+    desc: "Go live with confidence. Post-launch, we monitor performance, optimise based on real data, and scale what's working.",
     color: "text-secondary-light",
     border: "border-secondary/30",
     bg: "bg-secondary/10",
@@ -53,7 +53,7 @@ export default function Process() {
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-widest text-primary-light">
-            How I Work
+            How We Work
           </span>
           <h2
             id="process-heading"

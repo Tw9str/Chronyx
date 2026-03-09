@@ -40,26 +40,31 @@ export default function About() {
           {/* ── Left: text ── */}
           <div>
             <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-widest text-primary-light">
-              About Me
+              Who We Are
             </span>
             <h2
               id="about-heading"
               className="font-display text-4xl font-bold leading-tight text-ink md:text-5xl"
             >
-              Crafting Digital Solutions{" "}
-              <span className="gradient-text">That Convert</span>
+              Where Technology{" "}
+              <span className="gradient-text">Meets Growth.</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink-dim">
-              I&apos;m a freelance developer &amp; digital marketer with{" "}
-              <strong className="font-semibold text-ink">5+ years</strong> of
-              experience helping startups and established brands achieve their
-              digital goals. I combine technical precision with strategic
-              thinking to deliver results that matter.
+              Chronyx is a global digital agency partnering with startups,
+              scale-ups, and enterprise brands to engineer products and
+              accelerate growth. Our multidisciplinary team spans product
+              engineering, creative design, performance marketing, and data
+              strategy delivering integrated solutions that create measurable
+              business impact.
             </p>
             <p className="mt-4 leading-relaxed text-ink-dim">
-              Whether you need a blazing-fast web app, an intuitive mobile
-              experience, or a full-funnel marketing strategy — I handle it
-              end-to-end, removing the headache of managing multiple agencies.
+              With a combined{" "}
+              <strong className="font-semibold text-ink">
+                300k+ community
+              </strong>{" "}
+              across social platforms and a track record of shipping
+              production-grade products across dozens of industries, we operate
+              at the intersection of craftsmanship and commercial performance.
             </p>
 
             {/* Highlights */}
@@ -83,7 +88,7 @@ export default function About() {
           {/* ── Right: skills ── */}
           <div className="rounded-2xl border border-edge bg-overlay p-8">
             <h3 className="mb-6 font-display text-lg font-semibold text-ink">
-              Core Skills
+              Our Core Disciplines
             </h3>
             <dl className="space-y-5">
               {stack.map((s) => (

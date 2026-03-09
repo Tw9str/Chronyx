@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ── Admin users (passwordless) ─────────────────────────
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  otpTokens OtpToken[]
+
+  @@map("admin_users")
+}
+
+// ── OTP codes (expire after 10 min, single-use) ────────
+model OtpToken {
+  id        String   @id @default(cuid())
+  code      String   // 6-digit code (hashed)
+  email     String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  adminUser AdminUser? @relation(fields: [email], references: [email])
+
+  @@index([email])
+  @@map("otp_tokens")
+}
+
+// ── Contact form submissions ───────────────────────────
+model Message {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  projectType String?
+  budget      String?
+  message     String
+  status      MessageStatus @default(UNREAD)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("messages")
+}
+
+enum MessageStatus {
+  UNREAD
+  READ
+  ARCHIVED
+}
+
+// ── Portfolio projects ─────────────────────────────────
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  description String
+  tags        String[] // stored as array
+  gradient    String
+  accent      String
+  result      String
+  liveUrl     String?
+  repoUrl     String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([featured])
+  @@index([order])
+  @@map("projects")
+}
+
+// ── Site settings (key-value) ──────────────────────────
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+// ── Testimonials ───────────────────────────────────────
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  company   String?
+  quote     String
+  rating    Int      @default(5)
+  avatar    String   @default("")
+  project   String?
+  enabled   Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([enabled])
+  @@index([order])
+  @@map("testimonials")
+}
+
+// ── Social / contact channels ──────────────────────────
+model SocialLink {
+  id            String  @id @default(cuid())
+  platform      String  // "email" | "phone" | "whatsapp" | "x" | "instagram" | "linkedin" | "github" | "website"
+  label         String
+  value         String  // display text e.g. "hello@chronyx.tech" or "@chronyx"
+  url           String
+  enabled       Boolean @default(true)
+  order         Int     @default(0)
+  showInFooter  Boolean @default(true)
+  showInContact Boolean @default(true)
+
+  @@index([enabled])
+  @@index([order])
+  @@map("social_links")
+}
+
+

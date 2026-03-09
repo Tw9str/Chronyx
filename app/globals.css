@@ -175,3 +175,30 @@ body {
   box-shadow: 0 8px 40px rgba(124, 58, 237, 0.12), 0 2px 8px rgba(0,0,0,0.4);
   transform: translateY(-4px);
 }
+
+/* ─── Admin form utilities ─────────────────────────── */
+.label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-ink-dim);
+}
+
+.input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-edge);
+  background-color: var(--color-canvas);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  color: var(--color-ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input::placeholder { color: var(--color-ink-fade); }
+.input:focus {
+  border-color: rgba(167, 139, 250, 0.5);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+select.input option { background-color: var(--color-surface); }

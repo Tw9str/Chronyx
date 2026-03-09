@@ -79,7 +79,7 @@ export default function Services() {
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-widest text-primary-light">
-            What I Do
+            What We Do
           </span>
           <h2
             id="services-heading"
