@@ -1033,7 +1033,35 @@ export default function CostCalculator() {
 
   function goToContact() {
     if (!service || !scope) return;
-    window.location.href = "#contact";
+    const typeMap: Record<string, string> = {
+      web: "Web Development",
+      mobile: "Mobile App",
+      seo: "SEO & Analytics",
+      social: "Social Media",
+      content: "Content Strategy",
+      ads: "Paid Advertising",
+    };
+    const budget =
+      suffix === "/mo"
+        ? "Let's discuss"
+        : priceMin < 1000
+          ? "< $1,000"
+          : priceMin < 5000
+            ? "$1,000 \u2013 $5,000"
+            : priceMin < 10000
+              ? "$5,000 \u2013 $10,000"
+              : "$10,000+";
+    const rangeText =
+      suffix === "/mo"
+        ? `$${priceMin.toLocaleString()}\u2013$${priceMax.toLocaleString()}/mo`
+        : `$${priceMin.toLocaleString()}\u2013$${priceMax.toLocaleString()}`;
+    const note = `I would like to discuss a ${scope.label} project under your ${service.label} service. Based on the cost estimator, my budget is in the range of ${rangeText}. I would love to schedule a discovery call to go over the details and get started.`;
+    window.dispatchEvent(
+      new CustomEvent("calculator:contact", {
+        detail: { type: typeMap[service.id] ?? service.label, budget, note },
+      }),
+    );
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   }
 
   const navBtn =

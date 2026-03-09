@@ -119,7 +119,7 @@ export default async function Portfolio() {
             </h2>
           </div>
           <Link
-            href="#contact"
+            href="#calculator"
             className="inline-flex items-center gap-2 rounded-full border border-edge bg-surface px-5 py-2.5 text-sm font-medium text-ink-dim transition-all duration-200 hover:border-primary-light/40 hover:text-ink whitespace-nowrap"
           >
             Start a Project

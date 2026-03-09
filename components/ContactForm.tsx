@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent, type ChangeEvent } from "react";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
 
 const FALLBACK_EMAIL = "hello@chronyx.tech";
@@ -30,6 +30,26 @@ export default function ContactForm({ email }: { email?: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [projectType, setProjectType] = useState("");
+  const [budget, setBudget] = useState("");
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    function handleCalculatorContact(e: Event) {
+      const {
+        type,
+        budget: b,
+        note,
+      } = (e as CustomEvent<{ type: string; budget: string; note: string }>)
+        .detail;
+      if (type && projectTypes.includes(type)) setProjectType(type);
+      if (b && budgets.includes(b)) setBudget(b);
+      if (note) setMessage(note);
+    }
+    window.addEventListener("calculator:contact", handleCalculatorContact);
+    return () =>
+      window.removeEventListener("calculator:contact", handleCalculatorContact);
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -152,6 +172,10 @@ export default function ContactForm({ email }: { email?: string }) {
           <select
             id="cf-type"
             name="type"
+            value={projectType}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setProjectType(e.target.value)
+            }
             className="w-full cursor-pointer rounded-xl border border-edge bg-surface px-4 py-3 text-sm text-ink transition-all duration-200 focus:border-primary-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
           >
             <option value="" className="bg-surface">
@@ -174,6 +198,10 @@ export default function ContactForm({ email }: { email?: string }) {
           <select
             id="cf-budget"
             name="budget"
+            value={budget}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setBudget(e.target.value)
+            }
             className="w-full cursor-pointer rounded-xl border border-edge bg-surface px-4 py-3 text-sm text-ink transition-all duration-200 focus:border-primary-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
           >
             <option value="" className="bg-surface">
@@ -201,6 +229,8 @@ export default function ContactForm({ email }: { email?: string }) {
             name="message"
             required
             rows={5}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder="Tell us about your project — what you need, your timeline, and any other details…"
             className={`w-full resize-none rounded-xl border bg-surface px-4 py-3 text-sm text-ink placeholder-ink-fade transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 ${
               fieldErrors.message

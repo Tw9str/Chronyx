@@ -83,10 +83,10 @@ export default function Navbar() {
           {/* ── CTA + hamburger ── */}
           <div className="flex items-center gap-3">
             <Link
-              href="#contact"
+              href="#calculator"
               className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-light glow-violet md:inline-flex"
             >
-              Let&apos;s Talk
+              Get a Quote
               <ArrowRight />
             </Link>
             <button

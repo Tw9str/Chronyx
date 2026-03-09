@@ -135,10 +135,10 @@ export default async function Hero() {
               </Link>
 
               <Link
-                href="#contact"
+                href="#calculator"
                 className="inline-flex items-center gap-2 rounded-full border border-edge bg-surface px-7 py-3.5 text-sm font-semibold text-ink transition-all duration-200 hover:border-primary-light/40 hover:bg-overlay"
               >
-                Get a Quote
+                See What It Costs
               </Link>
             </div>
 

@@ -269,10 +269,10 @@ export default async function Footer() {
               Ready to take your digital presence to the next level?
             </p>
             <Link
-              href="#contact"
+              href="#calculator"
               className="inline-flex w-full items-center justify-center rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-light glow-violet"
             >
-              Start a Project
+              Let's Work Together
             </Link>
             <Link
               href={emailHref}
