@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -78,9 +79,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
-        <a href="#main-content" className="skip-nav">
+        <Link href="#main-content" className="skip-nav">
           Skip to main content
-        </a>
+        </Link>
         {children}
       </body>
     </html>

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import AdminShell from "@/components/admin/AdminShell";
 import { MessageSquare, FolderKanban, Mail, Clock } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 interface RecentMessage {
   id: string;
@@ -118,12 +119,12 @@ export default async function AdminDashboardPage() {
             <h2 className="font-display text-sm font-semibold text-ink">
               Recent Messages
             </h2>
-            <a
+            <Link
               href="/admin/messages"
               className="text-xs text-primary-light hover:underline"
             >
               View all →
-            </a>
+            </Link>
           </div>
 
           {recentMessages.length === 0 ? (

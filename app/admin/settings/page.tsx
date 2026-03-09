@@ -3,15 +3,25 @@
 import { useEffect, useState } from "react";
 import AdminShell from "@/components/admin/AdminShell";
 import { ExternalLink, Save, Loader2, BarChart3 } from "lucide-react";
+import Link from "next/link";
 
 const envVars = [
   { key: "DATABASE_URL", desc: "Neon PostgreSQL pooled connection string" },
-  { key: "DIRECT_URL", desc: "Neon direct connection string (for Prisma migrations)" },
+  {
+    key: "DIRECT_URL",
+    desc: "Neon direct connection string (for Prisma migrations)",
+  },
   { key: "JWT_SECRET", desc: "32-char random secret for JWT signing" },
   { key: "RESEND_API_KEY", desc: "Resend API key for sending OTP emails" },
   { key: "RESEND_FROM", desc: "Sender address shown in OTP emails" },
-  { key: "ADMIN_EMAILS", desc: "Comma-separated list of authorised admin emails" },
-  { key: "NEXT_PUBLIC_APP_URL", desc: "Public app URL (e.g. https://chronyx.tech)" },
+  {
+    key: "ADMIN_EMAILS",
+    desc: "Comma-separated list of authorised admin emails",
+  },
+  {
+    key: "NEXT_PUBLIC_APP_URL",
+    desc: "Public app URL (e.g. https://chronyx.tech)",
+  },
 ];
 
 const links = [
@@ -21,7 +31,11 @@ const links = [
 ];
 
 export default function AdminSettingsPage() {
-  const [stats, setStats] = useState({ stat_projects: "", stat_clients: "", stat_years: "" });
+  const [stats, setStats] = useState({
+    stat_projects: "",
+    stat_clients: "",
+    stat_years: "",
+  });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -31,8 +45,8 @@ export default function AdminSettingsPage() {
       .then((data: Record<string, string>) => {
         setStats({
           stat_projects: data.stat_projects ?? "",
-          stat_clients:  data.stat_clients  ?? "",
-          stat_years:    data.stat_years    ?? "",
+          stat_clients: data.stat_clients ?? "",
+          stat_years: data.stat_years ?? "",
         });
       })
       .catch(() => {});
@@ -64,42 +78,60 @@ export default function AdminSettingsPage() {
         {/* Hero Stats */}
         <div className="rounded-2xl border border-edge bg-surface overflow-hidden">
           <div className="border-b border-edge px-5 py-4 flex items-center gap-2">
-            <BarChart3 className="h-4 w-4 text-primary-light" aria-hidden="true" />
+            <BarChart3
+              className="h-4 w-4 text-primary-light"
+              aria-hidden="true"
+            />
             <div>
-              <h2 className="font-display text-sm font-semibold text-ink">Hero Stats</h2>
+              <h2 className="font-display text-sm font-semibold text-ink">
+                Hero Stats
+              </h2>
               <p className="mt-0.5 text-xs text-ink-fade">
-                Override the numbers shown in the hero section. Leave blank to use live DB counts.
+                Override the numbers shown in the hero section. Leave blank to
+                use live DB counts.
               </p>
             </div>
           </div>
           <form onSubmit={saveStats} className="p-5">
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
-                <label className="mb-1.5 block text-xs font-medium text-ink-dim">Projects Delivered</label>
+                <label className="mb-1.5 block text-xs font-medium text-ink-dim">
+                  Projects Delivered
+                </label>
                 <input
                   type="text"
                   value={stats.stat_projects}
-                  onChange={(e) => setStats({ ...stats, stat_projects: e.target.value })}
+                  onChange={(e) =>
+                    setStats({ ...stats, stat_projects: e.target.value })
+                  }
                   placeholder="Auto (from DB)"
                   className="w-full rounded-xl border border-edge bg-overlay px-3 py-2.5 text-sm text-ink placeholder-ink-fade focus:border-primary-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-xs font-medium text-ink-dim">Happy Clients</label>
+                <label className="mb-1.5 block text-xs font-medium text-ink-dim">
+                  Happy Clients
+                </label>
                 <input
                   type="text"
                   value={stats.stat_clients}
-                  onChange={(e) => setStats({ ...stats, stat_clients: e.target.value })}
+                  onChange={(e) =>
+                    setStats({ ...stats, stat_clients: e.target.value })
+                  }
                   placeholder="e.g. 30+"
                   className="w-full rounded-xl border border-edge bg-overlay px-3 py-2.5 text-sm text-ink placeholder-ink-fade focus:border-primary-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-xs font-medium text-ink-dim">Years Experience</label>
+                <label className="mb-1.5 block text-xs font-medium text-ink-dim">
+                  Years Experience
+                </label>
                 <input
                   type="text"
                   value={stats.stat_years}
-                  onChange={(e) => setStats({ ...stats, stat_years: e.target.value })}
+                  onChange={(e) =>
+                    setStats({ ...stats, stat_years: e.target.value })
+                  }
                   placeholder="e.g. 5+"
                   className="w-full rounded-xl border border-edge bg-overlay px-3 py-2.5 text-sm text-ink placeholder-ink-fade focus:border-primary-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
@@ -110,7 +142,11 @@ export default function AdminSettingsPage() {
               disabled={saving}
               className="mt-4 inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-light disabled:cursor-not-allowed disabled:opacity-60 glow-violet"
             >
-              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+              {saving ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Save className="h-4 w-4" />
+              )}
               {saving ? "Saving..." : saved ? "Saved!" : "Save Stats"}
             </button>
           </form>
@@ -149,7 +185,7 @@ export default function AdminSettingsPage() {
           </h2>
           <div className="flex flex-col gap-2">
             {links.map((l) => (
-              <a
+              <Link
                 key={l.label}
                 href={l.href}
                 target="_blank"
@@ -157,8 +193,11 @@ export default function AdminSettingsPage() {
                 className="cursor-pointer flex items-center justify-between rounded-xl border border-edge bg-overlay px-4 py-3 text-sm text-ink-dim transition-all hover:border-primary-light/30 hover:text-ink"
               >
                 {l.label}
-                <ExternalLink className="h-4 w-4 text-ink-fade" aria-hidden="true" />
-              </a>
+                <ExternalLink
+                  className="h-4 w-4 text-ink-fade"
+                  aria-hidden="true"
+                />
+              </Link>
             ))}
           </div>
         </div>

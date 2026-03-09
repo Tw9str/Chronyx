@@ -110,7 +110,7 @@ export default function Navbar() {
         {isOpen && (
           <div
             id="mobile-menu"
-            className="animate-slide-down border-t border-edge py-4 md:hidden"
+            className="animate-slide-down border-t border-edge bg-canvas py-4 md:hidden"
           >
             <ul className="flex flex-col gap-1" role="list">
               {navLinks.map((link) => (

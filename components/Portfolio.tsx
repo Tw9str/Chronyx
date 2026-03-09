@@ -192,7 +192,7 @@ export default async function Portfolio() {
                         {p.result}
                       </span>
                       {p.repoUrl && (
-                        <a
+                        <Link
                           href={p.repoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -200,10 +200,10 @@ export default async function Portfolio() {
                           className="rounded-md p-1 text-ink-fade transition-colors hover:text-ink"
                         >
                           <Github className="h-4 w-4" />
-                        </a>
+                        </Link>
                       )}
                       {p.liveUrl && (
-                        <a
+                        <Link
                           href={p.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -211,7 +211,7 @@ export default async function Portfolio() {
                           className="rounded-md p-1 text-ink-fade transition-colors hover:text-ink"
                         >
                           <ExternalLink className="h-4 w-4" />
-                        </a>
+                        </Link>
                       )}
                     </div>
                   </div>

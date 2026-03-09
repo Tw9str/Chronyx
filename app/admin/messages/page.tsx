@@ -10,6 +10,7 @@ import {
   RefreshCw,
   Loader2,
 } from "lucide-react";
+import Link from "next/link";
 
 type MessageStatus = "UNREAD" | "READ" | "ARCHIVED";
 
@@ -217,12 +218,12 @@ export default function AdminMessagesPage() {
                     <h2 className="font-display text-lg font-bold text-ink">
                       {selected.name}
                     </h2>
-                    <a
+                    <Link
                       href={`mailto:${selected.email}`}
                       className="text-sm text-primary-light hover:underline"
                     >
                       {selected.email}
-                    </a>
+                    </Link>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {selected.projectType && (
                         <span className="rounded-full border border-edge bg-overlay px-2.5 py-0.5 text-xs text-ink-fade">
@@ -255,12 +256,12 @@ export default function AdminMessagesPage() {
 
                 {/* Actions */}
                 <div className="mt-6 flex flex-wrap gap-2 border-t border-edge pt-5">
-                  <a
+                  <Link
                     href={`mailto:${selected.email}?subject=Re: Your enquiry via Chronyx`}
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-light glow-violet"
                   >
                     Reply via Email
-                  </a>
+                  </Link>
 
                   {selected.status !== "ARCHIVED" && (
                     <button

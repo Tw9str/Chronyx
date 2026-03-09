@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import ContactForm from "./ContactForm";
+import Link from "next/link";
 
 // Fallback channels shown when the DB has no social links yet
 const fallback = [
@@ -121,6 +122,9 @@ export default async function Contact() {
     .catch(() => []);
 
   const channels = dbLinks.length > 0 ? dbLinks : fallback;
+  const contactEmail =
+    dbLinks.find((l) => l.platform === "email")?.value ??
+    fallback.find((l) => l.platform === "email")?.value;
 
   return (
     <section
@@ -178,7 +182,7 @@ export default async function Contact() {
                 );
 
                 return ch.url ? (
-                  <a
+                  <Link
                     key={ch.id}
                     href={ch.url}
                     target={ch.url.startsWith("http") ? "_blank" : undefined}
@@ -191,7 +195,7 @@ export default async function Contact() {
                     aria-label={`${ch.label}: ${ch.value}`}
                   >
                     {card}
-                  </a>
+                  </Link>
                 ) : (
                   <div key={ch.id}>{card}</div>
                 );
@@ -226,7 +230,7 @@ export default async function Contact() {
 
           {/* ── Contact form (client component) ── */}
           <div className="rounded-2xl border border-edge bg-overlay p-6 lg:col-span-3 md:p-8">
-            <ContactForm />
+            <ContactForm email={contactEmail} />
           </div>
         </div>
       </div>
