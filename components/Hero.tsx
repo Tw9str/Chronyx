@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { IcoArrowRight } from "@/components/icons";
 
 const techs = [
   "React",
@@ -117,21 +118,7 @@ export default async function Hero() {
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-light glow-violet"
               >
                 View Our Work
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M1 7H13M13 7L7 1M13 7L7 13"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <IcoArrowRight className="h-3.5 w-3.5" />
               </Link>
 
               <Link

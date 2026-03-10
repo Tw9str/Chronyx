@@ -13,6 +13,7 @@ import {
   IcoX,
   IcoInstagram,
   IcoTiktok,
+  IcoMessageSquare,
 } from "@/components/icons";
 
 // Fallback channels shown when the DB has no social links yet
@@ -43,18 +44,30 @@ const fallback = [
 function PlatformIcon({ platform }: { platform: string }) {
   const cls = "h-5 w-5 text-primary-light";
   switch (platform) {
-    case "email":     return <IcoMail className={cls} />;
-    case "phone":     return <IcoPhone className={cls} />;
-    case "whatsapp":  return <IcoWhatsapp className={cls} />;
-    case "linkedin":  return <IcoLinkedinOutline className={cls} />;
-    case "github":    return <IcoGithubOutline className={cls} />;
-    case "youtube":   return <IcoYoutubeOutline className={cls} />;
-    case "website":   return <IcoGlobe className={cls} />;
-    case "location":  return <IcoMapPin className={cls} />;
-    case "x":         return <IcoX className={cls} />;
-    case "instagram": return <IcoInstagram className={cls} />;
-    case "tiktok":    return <IcoTiktok className={cls} />;
-    default:          return <IcoGlobe className={cls} />;
+    case "email":
+      return <IcoMail className={cls} />;
+    case "phone":
+      return <IcoPhone className={cls} />;
+    case "whatsapp":
+      return <IcoWhatsapp className={cls} />;
+    case "linkedin":
+      return <IcoLinkedinOutline className={cls} />;
+    case "github":
+      return <IcoGithubOutline className={cls} />;
+    case "youtube":
+      return <IcoYoutubeOutline className={cls} />;
+    case "website":
+      return <IcoGlobe className={cls} />;
+    case "location":
+      return <IcoMapPin className={cls} />;
+    case "x":
+      return <IcoX className={cls} />;
+    case "instagram":
+      return <IcoInstagram className={cls} />;
+    case "tiktok":
+      return <IcoTiktok className={cls} />;
+    default:
+      return <IcoGlobe className={cls} />;
   }
 }
 
@@ -150,18 +163,10 @@ export default async function Contact() {
             {/* Response time card */}
             <div className="mt-8 rounded-2xl border border-edge bg-overlay p-5">
               <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-ink">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <IcoMessageSquare
                   className="h-4 w-4 text-primary-light"
                   aria-hidden="true"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
+                />
                 Response Time
               </div>
               <p className="text-sm text-ink-dim">

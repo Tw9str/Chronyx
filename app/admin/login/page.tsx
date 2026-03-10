@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  IcoArrowRight,
+  IcoCheckCircle,
+  IcoMail,
+  IcoSpinner,
+} from "@/components/icons";
 
 type Step = "email" | "otp" | "success";
 
@@ -12,7 +18,6 @@ export default function AdminLoginPage() {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
   async function handleRequestOtp(e: React.FormEvent) {
     e.preventDefault();
     setError("");
@@ -89,7 +94,7 @@ export default function AdminLoginPage() {
 
           {step === "success" ? (
             <div className="flex flex-col items-center gap-3 py-6 text-center">
-              <CheckCircle2 className="h-12 w-12 text-secondary" />
+              <IcoCheckCircle className="h-12 w-12 text-secondary" />
               <p className="font-semibold text-ink">Signed in! Redirecting…</p>
             </div>
           ) : step === "otp" ? (
@@ -142,9 +147,9 @@ export default function AdminLoginPage() {
                   className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-white transition-all hover:bg-primary-light disabled:cursor-not-allowed disabled:opacity-60 glow-violet"
                 >
                   {loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <IcoSpinner className="h-4 w-4 animate-spin" />
                   ) : (
-                    <KeyRound className="h-4 w-4" />
+                    <IcoArrowRight className="h-4 w-4" />
                   )}
                   {loading ? "Verifying…" : "Verify Code"}
                 </button>
@@ -180,7 +185,7 @@ export default function AdminLoginPage() {
                     Email address
                   </label>
                   <div className="relative">
-                    <Mail
+                    <IcoMail
                       className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-fade"
                       aria-hidden="true"
                     />
@@ -213,9 +218,9 @@ export default function AdminLoginPage() {
                   className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-white transition-all hover:bg-primary-light disabled:cursor-not-allowed disabled:opacity-60 glow-violet"
                 >
                   {loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <IcoSpinner className="h-4 w-4 animate-spin" />
                   ) : (
-                    <ArrowRight className="h-4 w-4" />
+                    <IcoArrowRight className="h-4 w-4" />
                   )}
                   {loading ? "Sending code…" : "Send Login Code"}
                 </button>
