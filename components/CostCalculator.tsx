@@ -894,7 +894,7 @@ function ProgressBar({ step, total }: { step: number; total: number }) {
                     : "bg-edge text-ink-fade"
               }`}
             >
-              {i < step ? "checkmark" : i + 1}
+              {i < step ? <IcoCheckCircle className="h-3.5 w-3.5" /> : i + 1}
             </div>
             <span
               className={`hidden text-[10px] font-medium sm:block transition-colors ${i === step ? "text-ink" : "text-ink-fade"}`}
@@ -1463,9 +1463,7 @@ export default function CostCalculator() {
                                       className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-all ${sel ? "border-primary bg-primary" : "border-edge"}`}
                                     >
                                       {sel && (
-                                        <span className="text-[10px] font-bold text-white">
-                                          v
-                                        </span>
+                                        <IcoCheckCircle className="h-3 w-3 text-white" />
                                       )}
                                     </div>
                                   </div>

@@ -576,3 +576,72 @@ export function IcoSave({ size, className, ...props }: IcoProps) {
     </svg>
   );
 }
+
+export function IcoEye({ size, className, ...props }: IcoProps) {
+  return (
+    <svg {...stroke(size, className, props)}>
+      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+export function IcoArchive({ size, className, ...props }: IcoProps) {
+  return (
+    <svg {...stroke(size, className, props)}>
+      <rect width="20" height="5" x="2" y="3" rx="1" />
+      <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+      <path d="M10 12h4" />
+    </svg>
+  );
+}
+
+export function IcoRefresh({ size, className, ...props }: IcoProps) {
+  return (
+    <svg {...stroke(size, className, props)}>
+      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+      <path d="M21 3v5h-5" />
+      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+      <path d="M8 16H3v5" />
+    </svg>
+  );
+}
+
+export function IcoToggleLeft({ size, className, ...props }: IcoProps) {
+  return (
+    <svg {...stroke(size, className, props)}>
+      <rect width="20" height="12" x="2" y="6" rx="6" ry="6" />
+      <circle cx="8" cy="12" r="2" />
+    </svg>
+  );
+}
+
+export function IcoToggleRight({ size, className, ...props }: IcoProps) {
+  return (
+    <svg {...stroke(size, className, props)}>
+      <rect width="20" height="12" x="2" y="6" rx="6" ry="6" />
+      <circle cx="16" cy="12" r="2" />
+    </svg>
+  );
+}
+
+export function IcoLink({ size, className, ...props }: IcoProps) {
+  return (
+    <svg {...stroke(size, className, props)}>
+      <path d="M9 17H7A5 5 0 0 1 7 7h2" />
+      <path d="M15 7h2a5 5 0 1 1 0 10h-2" />
+      <line x1="8" x2="16" y1="12" y2="12" />
+    </svg>
+  );
+}
+
+export function IcoBarChart({ size, className, ...props }: IcoProps) {
+  return (
+    <svg {...stroke(size, className, props)}>
+      <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+      <path d="M7 16V11" />
+      <path d="M11 16V9" />
+      <path d="M15 16V5" />
+    </svg>
+  );
+}

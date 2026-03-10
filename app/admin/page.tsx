@@ -134,7 +134,7 @@ export default async function AdminDashboardPage() {
 
           {recentMessages.length === 0 ? (
             <div className="flex flex-col items-center gap-2 py-12 text-center">
-              <MessageSquare className="h-8 w-8 text-ink-fade" />
+              <IcoMessageSquare className="h-8 w-8 text-ink-fade" />
               <p className="text-sm text-ink-dim">No messages yet.</p>
             </div>
           ) : (

@@ -2,120 +2,15 @@
 
 import { useEffect, useState } from "react";
 import AdminShell from "@/components/admin/AdminShell";
-type IcoProps = React.SVGProps<SVGSVGElement>;
-function MessageSquare({ className, ...r }: IcoProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-      {...r}
-    >
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-    </svg>
-  );
-}
-function Trash2({ className, ...r }: IcoProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-      {...r}
-    >
-      <path d="M3 6h18" />
-      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-      <line x1="10" x2="10" y1="11" y2="17" />
-      <line x1="14" x2="14" y1="11" y2="17" />
-    </svg>
-  );
-}
-function Eye({ className, ...r }: IcoProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-      {...r}
-    >
-      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-function Archive({ className, ...r }: IcoProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-      {...r}
-    >
-      <rect width="20" height="5" x="2" y="3" rx="1" />
-      <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
-      <path d="M10 12h4" />
-    </svg>
-  );
-}
-function RefreshCw({ className, ...r }: IcoProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-      {...r}
-    >
-      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-      <path d="M21 3v5h-5" />
-      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-      <path d="M8 16H3v5" />
-    </svg>
-  );
-}
-function Loader2({ className, ...r }: IcoProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-      {...r}
-    >
-      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-    </svg>
-  );
-}
 import Link from "next/link";
+import {
+  IcoMessageSquare,
+  IcoTrash,
+  IcoSpinner,
+  IcoEye,
+  IcoArchive,
+  IcoRefresh,
+} from "@/components/icons";
 
 type MessageStatus = "UNREAD" | "READ" | "ARCHIVED";
 
@@ -225,7 +120,7 @@ export default function AdminMessagesPage() {
             className="cursor-pointer flex items-center gap-2 rounded-xl border border-edge bg-surface px-3 py-2 text-sm text-ink-dim transition-all hover:text-ink"
             aria-label="Refresh messages"
           >
-            <RefreshCw className="h-4 w-4" />
+            <IcoRefresh className="h-4 w-4" />
           </button>
         </div>
 
@@ -258,11 +153,11 @@ export default function AdminMessagesPage() {
             <div className="rounded-2xl border border-edge bg-surface overflow-hidden">
               {loading ? (
                 <div className="flex items-center justify-center py-20">
-                  <Loader2 className="h-6 w-6 animate-spin text-primary-light" />
+                  <IcoSpinner className="h-6 w-6 animate-spin text-primary-light" />
                 </div>
               ) : messages.length === 0 ? (
                 <div className="flex flex-col items-center gap-2 py-16 text-center">
-                  <MessageSquare className="h-8 w-8 text-ink-fade" />
+                  <IcoMessageSquare className="h-8 w-8 text-ink-fade" />
                   <p className="text-sm text-ink-dim">No messages found.</p>
                 </div>
               ) : (
@@ -375,9 +270,9 @@ export default function AdminMessagesPage() {
                       className="cursor-pointer inline-flex items-center gap-2 rounded-full border border-edge bg-overlay px-4 py-2 text-sm font-medium text-ink-dim transition-all hover:text-ink disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {actionId === selected.id ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <IcoSpinner className="h-4 w-4 animate-spin" />
                       ) : (
-                        <Archive className="h-4 w-4" />
+                        <IcoArchive className="h-4 w-4" />
                       )}
                       Archive
                     </button>
@@ -389,7 +284,7 @@ export default function AdminMessagesPage() {
                       disabled={actionId === selected.id}
                       className="cursor-pointer inline-flex items-center gap-2 rounded-full border border-edge bg-overlay px-4 py-2 text-sm font-medium text-ink-dim transition-all hover:text-ink disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      <Eye className="h-4 w-4" /> Unarchive
+                      <IcoEye className="h-4 w-4" /> Unarchive
                     </button>
                   )}
 
@@ -398,7 +293,7 @@ export default function AdminMessagesPage() {
                     disabled={actionId === selected.id}
                     className="cursor-pointer inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-medium text-red-400 transition-all hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    <Trash2 className="h-4 w-4" /> Delete
+                    <IcoTrash className="h-4 w-4" /> Delete
                   </button>
                 </div>
               </div>
